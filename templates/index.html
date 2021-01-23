@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% include 'header.html' %}
+
+
+{% block title %} Home {% endblock %}
+
+
+
+{% block body %}
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col md-12">
+            <div class="jumbotron p-3">
+                <h3>Manage <b>Reviews  </b><button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#mymodal"> Add New Review</button></h3>
+                {% with messages = get_flashed_messages() %}
+ 
+                {% if messages %}
+ 
+                {% for message in messages %}
+ 
+                <div class="alert alert-success alert-dismissable" role="alert">
+ 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+ 
+                        <span aria-hidden="true">x</span>
+ 
+                    </button>
+ 
+ 
+                {{message}}
+               </div>
+ 
+ 
+               {% endfor %}
+
+               {% endif %}
+               {% endwith %}
+
+                &nbsp;
+                <table class="table table-hover table-dark">
+                    <tr>
+                        <th>User</th>
+                        <th>Name of Product</th>
+                        <th>Review</th>
+                    </tr>
+                    {% for row in reviews %}
+
+                    <tr>
+                        <td>{{row.user}}</td>
+                        <td>{{row.nameofproduct}}</td>
+                        <td>{{row.productreview}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+
+            </div>
+            <div id="mymodal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                   <div class="modal-content">
+                      <div class="modal-header">
+              
+                         <h4 class="modal-title">Add Employee</h4>
+                      </div>
+                      <div class="modal-body">
+              
+                         <form action="{{url_for('insert')}}" method="POST">
+                    
+              
+                            <div class="form-group">
+              
+                               <label>User</label>
+                               <input type="text" class="form-control" name="user" required="1">
+              
+              
+                            </div>
+              
+              
+                             <div class="form-group">
+              
+              
+                               <label>Name of Product</label>
+                               <input type="text" class="form-control" name="nop" required="1">
+              
+              
+                            </div>
+              
+              
+                             <div class="form-group">
+              
+              
+                               <label>Review of Product</label>
+                               <input type="text" class="form-control" name="rop" required="1">
+                              
+              
+              
+                            </div>
+              
+              
+              
+                            <div class="form-group">
+              
+              
+                               <button class="btn btn-primary" type="submit">Add Review</button>
+              
+              
+                            </div>
+              
+              
+                         </form>
+              
+              
+                      </div>
+              
+              
+                      <div class="modal-footer">
+              
+              
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              
+              
+                      </div>
+              
+              
+                   </div>
+              
+              
+                </div>
+              
+              
+             </div>
+              
+              
+              
+              
+              
+              
+
+        </div>
+    </div>
+
+    
+</div>
+
+
+{% endblock %}
